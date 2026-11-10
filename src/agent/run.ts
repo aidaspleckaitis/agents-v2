@@ -5,8 +5,11 @@ import { tools } from "./tools/index.ts";
 import { SYSTEM_PROMPT } from "./system/prompt.ts";
 
 import type { AgentCallbacks } from "../types.ts";
+import { getTracer, Laminar } from "@lmnr-ai/lmnr";
 
 const MODEL_NAME = "gpt-5-mini";
+
+Laminar.initialize({ projectApiKey: "" });
 
 export async function runAgent(
   userMessage: string,
@@ -19,6 +22,7 @@ export async function runAgent(
     prompt: userMessage,
     system: SYSTEM_PROMPT,
     tools,
+    experimental_telemetry: { isEnabled: true, tracer: getTracer() },
   });
 
   console.log(text);

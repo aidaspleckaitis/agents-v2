@@ -46,10 +46,10 @@ const TOOL_DEFINITIONS: any = {
   },
 };
 
-export const singleTurnExecutor = async (data: EvalData) => {
+export const singleTurnExecutorWithMocks = async (data: EvalData) => {
   const messages = buildMessages(data);
 
-  const tools: Toolset = {};
+  const tools: ToolSet = {};
 
   for (const toolName of data.tools) {
     const def = TOOL_DEFINITIONS[toolName];
@@ -75,7 +75,7 @@ export const singleTurnExecutor = async (data: EvalData) => {
     args: "args" in tc ? tc.args : {},
   }));
 
-  const toolNames = toolCalls.map((tc) => tc.toolNames);
+  const toolNames = toolCalls.map((tc) => tc.toolName);
 
   return { toolCalls, toolNames, selectedAny: toolNames.length > 0 };
 };

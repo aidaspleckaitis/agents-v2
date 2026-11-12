@@ -9,7 +9,7 @@ import { getTracer, Laminar } from "@lmnr-ai/lmnr";
 
 const MODEL_NAME = "gpt-5-mini";
 
-Laminar.initialize({ projectApiKey: "" });
+Laminar.initialize({ projectApiKey: process.env.LMNR_PROJECT_API_KEY });
 
 export async function runAgent(
   userMessage: string,
